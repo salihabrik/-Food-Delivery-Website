@@ -1,0 +1,41 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.navbar .logo{
+    width: 150px;
+}
+
+.navbar-menu{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 20px;
+    color: #49557e;
+    font-size: 18px;
+}
+
+.navbar-right{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 40px;
+}
+.navbar button{
+    background: transparent ;
+    font-size: 16px;
+    color: #49557e;
+    border: 1px solid tomato ;
+    padding: 10px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.navbar button:hover {
+    background: tomato;
+    color: white;
+    
+}
