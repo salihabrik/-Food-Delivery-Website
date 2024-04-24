@@ -22,6 +22,7 @@ const FoodItem = ({ id, name, image, price, description }) => {
               src={assets.add_icon_green}
               alt=''
             />
+            
 
           </div>
         
