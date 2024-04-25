@@ -1,18 +1,25 @@
 // StoreContext.jsx
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 
 export const StoreContext = createContext();
 
 export const StoreContextProvider = (props) => {
   const [cart, setCart] = useState([]);
 
-  const addToCart = (item) => {
-    setCart((prevCart) => [...prevCart, item]);
-  };
+  const addToCart = (itemId) => {
+    if (!cartItems[itemId]) {
+      setCart((prevCart) => [...prev, { id: itemId, quantity: 1 }]);
+    } else {
+    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+  }
 
   const removeFromCart = (itemId) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== itemId));
-  };
+    setCartItems((prev) => prev, { ...prev, [itemId]: prev[itemId] - 1 });
+  }
+  useEffect(() => {
+    console.log(cartItems);
+  },[cartItems])
+  
 
   const contextValue = {
     cart,
@@ -25,4 +32,4 @@ export const StoreContextProvider = (props) => {
       {props.children}
     </StoreContext.Provider>
   );
-};
+}
