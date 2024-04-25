@@ -1,28 +1,33 @@
-// StoreContext.jsx
 import React, { createContext, useEffect, useState } from 'react';
 
-export const StoreContext = createContext();
+export const StoreContext = createContext(null);
 
-export const StoreContextProvider = (props) => {
-  const [cart, setCart] = useState([]);
+const StoreContextProvider = (props) => {
+  const [cartItems, setCartItems] = useState({});
 
   const addToCart = (itemId) => {
-    if (!cartItems[itemId]) {
-      setCart((prevCart) => [...prev, { id: itemId, quantity: 1 }]);
-    } else {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-  }
+    setCartItems((prev) => ({
+      ...prev,
+      [itemId]: prev[itemId] ? prev[itemId] + 1 : 1,
+    }));
+  };
 
   const removeFromCart = (itemId) => {
-    setCartItems((prev) => prev, { ...prev, [itemId]: prev[itemId] - 1 });
-  }
+    setCartItems((prev) => {
+      if (!prev[itemId] || prev[itemId] === 1) {
+        const { [itemId]: _, ...rest } = prev;
+        return rest;
+      }
+      return { ...prev, [itemId]: prev[itemId] - 1 };
+    });
+  };
+
   useEffect(() => {
     console.log(cartItems);
-  },[cartItems])
-  
+  }, [cartItems]);
 
   const contextValue = {
-    cart,
+    cartItems,
     addToCart,
     removeFromCart,
   };
@@ -32,4 +37,6 @@ export const StoreContextProvider = (props) => {
       {props.children}
     </StoreContext.Provider>
   );
-}
+};
+
+export default StoreContextProvider;
